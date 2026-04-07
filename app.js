@@ -1,8 +1,8 @@
 // State & Constants
 let hfApiKey = localStorage.getItem('hf_api_key') || '';
 let hfChatHistory = [];
-const HF_MODEL = 'HuggingFaceH4/zephyr-7b-beta';
-const HF_API_BASE = 'https://router.huggingface.co/v1/chat/completions';
+const HF_MODEL = 'mistralai/Mistral-7B-Instruct-v0.3';
+const HF_API_BASE = 'https://api-inference.huggingface.co/models/' + HF_MODEL + '/v1/chat/completions';
 const FLUX_MODEL = 'black-forest-labs/FLUX.1-schnell';
 const FLUX_API_URL = `https://router.huggingface.co/hf-inference/models/${FLUX_MODEL}`;
 
@@ -197,7 +197,7 @@ async function callHfApi(history) {
         },
         body: JSON.stringify({
             model: HF_MODEL,
-            messages: [{ role: 'system', content: 'You are a helpful, brilliant AI assistant called Zephyr. Answer concisely and use markdown formatting.' }, ...history],
+            messages: [{ role: 'system', content: 'You are a helpful, brilliant AI assistant called Mistral. Answer concisely and use markdown formatting.' }, ...history],
             max_tokens: 2048,
             temperature: 0.7,
             stream: false
