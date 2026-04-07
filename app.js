@@ -2,7 +2,7 @@
 let hfApiKey = localStorage.getItem('hf_api_key') || '';
 let hfChatHistory = [];
 const HF_MODEL = 'mistralai/Mistral-7B-Instruct-v0.3';
-const HF_API_BASE = 'https://api-inference.huggingface.co/models/' + HF_MODEL + '/v1/chat/completions';
+const HF_API_BASE = 'https://router.huggingface.co/hf-inference/v1/chat/completions';
 const FLUX_MODEL = 'black-forest-labs/FLUX.1-schnell';
 const FLUX_API_URL = `https://router.huggingface.co/hf-inference/models/${FLUX_MODEL}`;
 
