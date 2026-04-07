@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HF Studio - AI Workspace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="logo-icon"></div>
+                <h2>HF Studio</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-target="hf-view">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    GPT-OSS 120B
+                </button>
+                <button class="nav-item" data-target="img-view">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                    Image Generation
+                </button>
+            </nav>
+
+            <div class="settings-drawer">
+                <label for="hf-api-key">HF Settings</label>
+                <div class="settings-input-group">
+                    <span class="input-label">HF API Token</span>
+                    <input type="password" id="hf-api-key" placeholder="Enter standard HF token">
+                    <button id="save-hf-key">Save HF Key</button>
+                </div>
+            </div>
+
+            <footer class="sidebar-footer">
+                ©️ 2026 Antigravity AI
+            </footer>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="chat-main">
+            <!-- View 1: HF View -->
+            <div id="hf-view" class="view-container active">
+                <header class="chat-header">
+                    <div class="status-indicator">
+                        <span class="hf-dot"></span>
+                        <span class="status-text">openai/gpt-oss-120b · Hugging Face</span>
+                    </div>
+                    <button id="clear-hf-chat" class="clear-btn" title="Clear Chat">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                            </path>
+                        </svg>
+                    </button>
+                </header>
+
+                <div id="hf-messages" class="chat-messages">
+                    <div class="message assistant">
+                        <div class="message-content">
+                            <p>👋 Hello! I'm GPT-OSS 120B running on Hugging Face. Enter your HF API token in the
+                                sidebar and start chatting!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="chat-footer">
+                    <div class="input-container">
+                        <textarea id="hf-user-input" placeholder="Type your message..."></textarea>
+                        <button id="hf-send-btn" class="send-btn hf-send" title="Send message">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- View 2: Image View -->
+            <div id="img-view" class="view-container hidden">
+                <header class="chat-header">
+                    <div class="status-indicator">
+                        <span class="img-dot"></span>
+                        <span class="status-text">black-forest-labs/FLUX.1-schnell · Image Generation</span>
+                    </div>
+                </header>
+
+                <div class="img-workspace">
+                    <div class="img-prompt-panel">
+                        <div class="panel-header">
+                            <h2>✨ Image Generation</h2>
+                            <p class="subtitle">Powered by FLUX.1-schnell</p>
+                        </div>
+
+                        <div class="img-form">
+                            <textarea id="img-prompt" class="img-prompt-input"
+                                placeholder="Describe the image you want to generate..."></textarea>
+
+                            <div class="img-options">
+                                <div class="option-group">
+                                    <label for="img-steps">Steps</label>
+                                    <select id="img-steps">
+                                        <option value="1">1 (Fastest)</option>
+                                        <option value="2">2</option>
+                                        <option value="4">4 (Quality)</option>
+                                    </select>
+                                </div>
+                                <div class="option-group">
+                                    <label for="img-seed">Seed</label>
+                                    <input type="number" id="img-seed" placeholder="Random">
+                                </div>
+                            </div>
+
+                            <button id="img-generate-btn" class="btn img-generate-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                                Generate Image
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="img-output-panel">
+                        <div id="img-output" class="img-output-placeholder">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" class="placeholder-icon">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                            <p>Your generated image will appear here</p>
+                        </div>
+                        <div id="img-actions" class="img-actions hidden">
+                            <a id="img-download" download="flux-image.png" class="btn btn-secondary">⬇ Download</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
